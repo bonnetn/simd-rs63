@@ -1,4 +1,5 @@
 #![feature(portable_simd)]
+#![forbid(unsafe_code)]
 #![deny(missing_docs)]
 
 //! Reed-Solomon erasure coding over GF(2⁸).
