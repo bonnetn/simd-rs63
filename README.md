@@ -1,5 +1,10 @@
 # SIMD Reed Solomon
 
+[![Crates.io](https://img.shields.io/crates/v/simd-rs63.svg)](https://crates.io/crates/simd-rs63)
+[![Docs.rs](https://docs.rs/simd-rs63/badge.svg)](https://docs.rs/simd-rs63)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/bonnetn/simd-rs63/actions/workflows/ci.yml/badge.svg)](https://github.com/bonnetn/simd-rs63/actions/workflows/ci.yml)
+
 A Rust implementation of Reed–Solomon RS(6,3) using SIMD instructions for fast GF(256) arithmetic. 
 
 It encodes 6 data shards into 3 parity shards, producing a 9-shard codeword, and can recover the original data when any 0 to 3 shards are missing.

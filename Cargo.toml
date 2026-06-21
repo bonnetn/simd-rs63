@@ -9,6 +9,9 @@ readme = "README.md"
 keywords = ["reed-solomon", "erasure-coding", "simd", "gf256", "fec"]
 categories = ["encoding", "algorithms"]
 
+[package.metadata.docs.rs]
+rustdoc-args = ["--cfg", "docsrs"]
+
 [dependencies]
 
 [lib]
