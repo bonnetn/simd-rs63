@@ -1,6 +1,4 @@
-use crate::reed_solomon::RS_N;
-use crate::reed_solomon::LANES;
-
+use crate::{BLOCK_ALIGNMENT, N};
 
 /// Errors returned by [`encode`] and [`recover`].
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -28,7 +26,7 @@ impl std::fmt::Display for Error {
         match self {
             Error::InvalidBlockSize(size) => write!(
                 f,
-                "block size {size} is not a positive multiple of {LANES}"
+                "block size {size} is not a positive multiple of {BLOCK_ALIGNMENT}"
             ),
             Error::BlockSizeMismatch { expected, got } => write!(
                 f,
@@ -36,7 +34,7 @@ impl std::fmt::Display for Error {
             ),
             Error::DuplicateIndex(idx) => write!(f, "duplicate block index {idx}"),
             Error::IndexOutOfRange(idx) => {
-                write!(f, "block index {idx} is out of range (must be less than {RS_N})")
+                write!(f, "block index {idx} is out of range (must be less than {N})")
             }
         }
     }

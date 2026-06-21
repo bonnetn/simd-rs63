@@ -4,9 +4,9 @@ mod lanes;
 use std::simd::Simd;
 use crate::{gf8::{gf8_simd_mul, gf8_simd_mul_xor}, reed_solomon::constants::get_fix_matrix};
 
-pub use crate::reed_solomon::lanes::LANES;
+pub(crate) use crate::reed_solomon::lanes::LANES;
 
-pub use constants::{RS_K, RS_M, RS_N};
+use constants::{RS_K, RS_M, RS_N};
 
 
 pub fn fix_errors<'a, 'b, const N: usize>(

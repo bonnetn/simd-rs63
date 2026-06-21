@@ -55,13 +55,15 @@ mod error;
 use reed_solomon::LANES;
 
 /// Total number of blocks per stripe (data + parity).
-pub use crate::reed_solomon::{RS_N as N};
+pub const N: usize = 9;
 
 /// Number of data blocks per stripe.
-pub use crate::reed_solomon::{RS_K as K};
+pub const K: usize = 6;
 
 /// Number of parity blocks per stripe.
-pub use crate::reed_solomon::{RS_M as M};
+///
+/// Any combination of up to `M` lost blocks can be recovered from the remaining [`K`].
+pub const M: usize = 3;
 
 /// Required alignment for block sizes.
 ///

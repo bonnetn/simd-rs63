@@ -1,13 +1,13 @@
 use crate::gf8::GF8;
 
-/// Number of data blocks per stripe.
-pub const RS_N: usize = 9;
+/// Total number of blocks per stripe (data + parity).
+pub(super) const RS_N: usize = 9;
 
 /// Number of data blocks per stripe.
-pub const RS_K: usize = 6;
+pub(super) const RS_K: usize = 6;
 
 /// Number of parity blocks per stripe.
-pub const RS_M: usize = RS_N - RS_K;
+pub(super) const RS_M: usize = RS_N - RS_K;
 
 const H_MAT: [[GF8; RS_N]; RS_M] = compute_h_matrix();
 const H_P_MAT: [[GF8; RS_M]; RS_M] = compute_h_p_matrix();
