@@ -1,7 +1,8 @@
 use crate::{BLOCK_ALIGNMENT, N};
 
 /// Errors returned by [`encode`] and [`recover`].
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum Error {
     /// Block size is zero or not a multiple of [`BLOCK_ALIGNMENT`].
     InvalidBlockSize(usize),
