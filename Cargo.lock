@@ -357,13 +357,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "reed-solomon"
-version = "0.1.0"
-dependencies = [
- "criterion",
-]
-
-[[package]]
 name = "regex"
 version = "1.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -448,6 +441,13 @@ dependencies = [
  "serde",
  "serde_core",
  "zmij",
+]
+
+[[package]]
+name = "simd-rs63"
+version = "0.1.0"
+dependencies = [
+ "criterion",
 ]
 
 [[package]]
