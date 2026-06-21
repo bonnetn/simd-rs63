@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use reed_solomon::{encode, recover, K, M, N, BLOCK_ALIGNMENT};
+use simd_rs63::{encode, recover, K, M, N, BLOCK_ALIGNMENT};
 
 const SIZES_KIB: &[usize] = &[64, 256, 1024];
 
