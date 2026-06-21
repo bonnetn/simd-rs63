@@ -10,7 +10,7 @@
 //! # Quick start
 //!
 //! ```
-//! use reed_solomon::{encode, recover, K, M, BLOCK_ALIGNMENT};
+//! use simd_rs63::{encode, recover, K, M, BLOCK_ALIGNMENT};
 //!
 //! let block_size = 4 * BLOCK_ALIGNMENT;
 //!
@@ -18,10 +18,11 @@
 //! let data: Vec<Vec<u8>> = (0..K).map(|i| vec![i as u8; block_size]).collect();
 //!
 //! // Encode: compute M parity blocks.
-//! let mut parity: Vec<Vec<u8>> = vec![vec![0u8; block_size]; M];
+//! let mut parity = [vec![0u8; block_size], vec![0u8; block_size], vec![0u8; block_size]];
+//! let [p0, p1, p2] = &mut parity;
 //! encode(
 //!     std::array::from_fn(|i| data[i].as_slice()),
-//!     std::array::from_fn(|i| parity[i].as_mut_slice()),
+//!     [p0.as_mut_slice(), p1.as_mut_slice(), p2.as_mut_slice()],
 //! ).unwrap();
 //!
 //! // Simulate losing data blocks 3, 4 and 5.
@@ -88,7 +89,7 @@ pub use error::Error;
 /// # Example
 ///
 /// ```
-/// use reed_solomon::{encode, BLOCK_ALIGNMENT};
+/// use simd_rs63::{encode, BLOCK_ALIGNMENT};
 ///
 /// let block_size = 4 * BLOCK_ALIGNMENT;
 ///
@@ -116,11 +117,8 @@ pub use error::Error;
 ///     data[5].as_slice(),
 /// ];
 ///
-/// let parity_shards = [
-///     parity[0].as_mut_slice(),
-///     parity[1].as_mut_slice(),
-///     parity[2].as_mut_slice(),
-/// ];
+/// let [p0, p1, p2] = &mut parity;
+/// let parity_shards = [p0.as_mut_slice(), p1.as_mut_slice(), p2.as_mut_slice()];
 ///
 /// encode(data_shards, parity_shards).unwrap();
 /// ```
@@ -171,7 +169,7 @@ pub fn encode(data: [&[u8]; K], parity: [&mut [u8]; M]) -> Result<(), Error> {
 /// # Example
 ///
 /// ```
-/// use reed_solomon::{encode, recover, K, M, BLOCK_ALIGNMENT};
+/// use simd_rs63::{encode, recover, K, M, BLOCK_ALIGNMENT};
 ///
 /// let block_size = 4 * BLOCK_ALIGNMENT;
 ///
@@ -179,24 +177,13 @@ pub fn encode(data: [&[u8]; K], parity: [&mut [u8]; M]) -> Result<(), Error> {
 ///     .map(|i| vec![i as u8; block_size])
 ///     .collect();
 ///
-/// let mut parity: Vec<Vec<u8>> = vec![vec![0; block_size]; M];
+/// let mut parity = [vec![0u8; block_size], vec![0u8; block_size], vec![0u8; block_size]];
+/// let [p0, p1, p2] = &mut parity;
 ///
-/// let data_refs = [
-///     data[0].as_slice(),
-///     data[1].as_slice(),
-///     data[2].as_slice(),
-///     data[3].as_slice(),
-///     data[4].as_slice(),
-///     data[5].as_slice(),
-/// ];
-///
-/// let parity_refs = [
-///     parity[0].as_mut_slice(),
-///     parity[1].as_mut_slice(),
-///     parity[2].as_mut_slice(),
-/// ];
-///
-/// encode(data_refs, parity_refs).unwrap();
+/// encode(
+///     std::array::from_fn(|i| data[i].as_slice()),
+///     [p0.as_mut_slice(), p1.as_mut_slice(), p2.as_mut_slice()],
+/// ).unwrap();
 ///
 /// // Recover data shard 0 using data shards 1..=5 and parity shard 0.
 /// // Shard indexes 0..K are data shards, and K..K+M are parity shards.
