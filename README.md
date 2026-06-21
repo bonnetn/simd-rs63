@@ -4,7 +4,7 @@ A Rust implementation of Reed–Solomon RS(6,3) using SIMD instructions for fast
 
 It encodes 6 data shards into 3 parity shards, producing a 9-shard codeword, and can recover the original data when any 0 to 3 shards are missing.
 
-It uses **no unsafe code** while still compiling down to SIMD instructions, thanks to [Rust's portable SIMD API](https://doc.rust-lang.org/std/simd/index.html).
+It uses **no unsafe code** while still compiling down to SIMD instructions, thanks to [Rust's portable SIMD API](https://doc.rust-lang.org/std/simd/index.html). It has **zero dependencies**.
 
 On a 2020 MacBook Air M1, it reaches **22 GiB/s/thread** for encoding parity and **42 GiB/s/thread** when recovering a single missing shard.
 
