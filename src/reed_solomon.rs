@@ -35,10 +35,10 @@ pub fn fix_errors<'a, 'b, const N: usize>(
         to_fix.map(|(_, s)| s.as_chunks_mut::<LANES>().0);
 
     for i in 1..RS_K {
-        debug_assert_eq!(s_chunks[i].len(), n_chunks);
+        assert_eq!(s_chunks[i].len(), n_chunks);
     }
     for j in 0..N {
-        debug_assert_eq!(f_chunks[j].len(), n_chunks);
+        assert_eq!(f_chunks[j].len(), n_chunks);
     }
 
     for chunk_idx in 0..n_chunks {
